@@ -24,9 +24,6 @@ const Custom_order = () => {
   
             </div>
               <div>
-
-              <p><strong>Size:</strong> {product.size}</p>
-              <p><strong>Color:</strong> {product.color}</p>
               <p><strong>Description:</strong> {product.description}</p>
                 <div style={{ display: 'flex', alignItems: 'center',  padding: '5px' }}>
                 <strong>Enter Price in birr: </strong>
