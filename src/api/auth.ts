@@ -4,13 +4,6 @@ import { setAuthRefreshInterceptor } from "@/api/interceptors/authInterceptor";
 
 setAuthRefreshInterceptor();
 
-export interface User {
-  id: string;
-  email: string;
-  role: "admin" | string;
-  [key: string]: any;
-}
-
 // --- Helpers ---
 const parseError = (error: unknown, fallback: string): string => {
   const err = error as AxiosError<{ message?: string }>;
@@ -19,9 +12,9 @@ const parseError = (error: unknown, fallback: string): string => {
 
 // --- Auth Functions ---
 
-export const getCurrentUser = async (): Promise<User | null> => {
+export const getCurrentUser = async (): Promise<string | null> => {
   try {
-    const { data } = await api.get<{ user: User | null }>(
+    const { data } = await api.get<{ user: string | null }>(
       "/api/admin/auth/user"
     );
     return data.user;
@@ -45,12 +38,15 @@ export const refreshToken = async (): Promise<{
 export const signInUser = async (
   email: string,
   password: string
-): Promise<{ user?: User; error?: string }> => {
+): Promise<{ user?: string; error?: string }> => {
   try {
-    const { data } = await api.post<{ user: User }>("/api/admin/auth/sign-in", {
-      email,
-      password,
-    });
+    const { data } = await api.post<{ user: string }>(
+      "/api/admin/auth/sign-in",
+      {
+        email,
+        password,
+      }
+    );
     return { user: data.user };
   } catch (error) {
     return { error: parseError(error, "Sign in failed! Please try again.") };

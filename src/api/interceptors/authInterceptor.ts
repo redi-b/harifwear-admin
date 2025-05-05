@@ -14,6 +14,8 @@ const shouldSkipAuthRefresh = (url?: string) => {
 
 let onTokenRefreshFailed: (() => Promise<void> | void)[] = [];
 
+let refreshPromise: Promise<{ error?: any }> | null = null;
+
 export const setAuthRefreshInterceptor = () => {
   api.interceptors.response.use(
     (response) => response,
@@ -27,14 +29,21 @@ export const setAuthRefreshInterceptor = () => {
       ) {
         originalRequest._retry = true;
 
-        const { error } = await refreshToken();
+        if (!refreshPromise) {
+          refreshPromise = refreshToken().finally(() => {
+            refreshPromise = null;
+          });
+        }
 
-        if (!error) {
-          // If refresh succeeded, retry the original request
+        const { error: refreshError } = await refreshPromise;
+
+        if (!refreshError) {
+          // Retry original request after successful refresh
           return api(originalRequest);
         } else {
-          // If refresh failed, run the callbacks
+          // Refresh failed, notify all and reject this request
           await runTokenRefreshFailCallbacks();
+          return Promise.reject(error);
         }
       }
 
