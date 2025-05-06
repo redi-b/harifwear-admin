@@ -82,7 +82,7 @@ const CustomOrderCard = ({
       </p>
       <div className="flex justify-end">
         <Link
-          to={`/orders/${order.id}`}
+          to={`/orders/custom/${order.id}`}
           className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition-colors bg-orange-500 rounded-full hover:bg-orange-600"
           onClick={(e) => e.stopPropagation()}
         >
