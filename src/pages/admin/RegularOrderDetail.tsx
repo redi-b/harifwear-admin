@@ -102,7 +102,6 @@ const RegularOrderDetail: React.FC = () => {
   useEffect(() => {
     if (!fetchingOrder && order) {
       setSelectedStatus(order.status);
-      console.log(order);
     }
   }, [fetchingOrder, order]);
 

@@ -10,7 +10,6 @@ export const getAllOrders = () => api.get("/api/admin/order");
 export const updateOrderStatus = (orderId: string, status: OrderStatus) =>
   api.patch(`/api/admin/order/${orderId}`, { status });
 
-console.log( updateOrderStatus("1","shipped") );
 export const deleteOrder = (orderId: string) =>
   api.delete(`/api/admin/order/${orderId}`);
 
