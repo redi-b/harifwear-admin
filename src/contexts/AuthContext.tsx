@@ -97,7 +97,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       } else {
         setUser(null);
         setError(isUserError ? userError : null);
-        clearAuthCookie();
+        Cookies.remove(AUTH_USER);
       }
       setVerifying(false);
       setLoading(false);
@@ -154,7 +154,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       } catch (error) {
         console.error("Error signing out!");
       }
-      navigate(`/sign-in#error=${errorMessage}`);
+      navigate(`/sign-in#error=${errorMessage}`, {
+        state: { from: location.pathname },
+      });
     });
   }, []);
 

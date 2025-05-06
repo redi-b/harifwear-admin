@@ -28,7 +28,9 @@ export const refreshToken = async (): Promise<{
   error?: string;
 }> => {
   try {
-    const { data } = await api.post<{ message?: string }>("/api/auth/refresh");
+    const { data } = await api.post<{ message?: string }>(
+      "/api/admin/auth/refresh"
+    );
     return { message: data.message };
   } catch (error) {
     return { error: parseError(error, "Token refresh failed!") };

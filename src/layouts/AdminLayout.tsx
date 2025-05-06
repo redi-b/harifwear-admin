@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import Loading from "@/components/Loading";
 
 const AdminLayout = () => {
-  const { user, authenticated, loading, signOut } = useAuth();
+  const { user, authenticated, signOut } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !authenticated) {
+    if (!authenticated) {
       navigate("/sign-in");
     }
-  }, [authenticated, loading, navigate]);
+  }, [authenticated, navigate]);
 
   const handleLogout = async () => {
     const { error } = await signOut();
@@ -22,19 +22,19 @@ const AdminLayout = () => {
     }
   };
 
-  if (loading || !authenticated) return <Loading />;
+  if (!authenticated) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="flex items-center justify-between px-6 py-4 bg-white border-b">
-        <div className="text-lg font-semibold text-orange-600">
+        <Link to={"/"} className="text-lg font-semibold text-orange-600">
           Harifwear Admin
-        </div>
+        </Link>
         <div className="flex items-center gap-4 text-sm text-gray-600">
           <span>{user?.email}</span>
           <button
             onClick={handleLogout}
-            className="px-3 py-1 text-white bg-orange-600 rounded hover:bg-orange-500 cursor-pointer"
+            className="px-3 py-1 text-white bg-orange-600 rounded cursor-pointer hover:bg-orange-500"
           >
             Logout
           </button>

@@ -1,47 +1,42 @@
 import React from "react";
-import { FaChevronDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
-
   return (
-    <div className="min-h-screen  text-black p-8">
+    <div className="p-8 text-black">
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-semibold text-gray-800">
+            Admin Dashboard
+          </h1>
+          <p className="text-sm text-gray-600">
+            Dashbaord for managing Harifwear orders and operations.
+          </p>
+        </div>
 
-      <div className="flex flex-col gap-4 max-w-sm">
-        
-        <Link className="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-xl text-left"
-        
-          to="/normal_orders">
-          Normal orders
-        </Link>
-
-        
-        <Link className="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-xl text-left"
-        
-          to="/custom_orders">
-          Custom orders
-        </Link>
-
-        
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Link
-            to={'/order_status'}
-            className="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-xl w-full flex justify-between items-center"
+            to="/orders"
+            className="w-full max-w-xl p-6 transition bg-white border border-orange-100 shadow-sm rounded-2xl hover:shadow-md hover:bg-orange-50"
           >
-            Order status 
+            <h2 className="text-lg font-medium text-orange-700">
+              Order Management
+            </h2>
+            <p className="mt-1 text-sm text-gray-600">
+              View, update, and track customer orders.
+            </p>
           </Link>
-          
-        
 
-        <Link className="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-xl text-left"
-        
-          to="/admin/dashboard/products">
-          User account management
-        </Link>
+          <div className="w-full max-w-xl p-6 transition border border-gray-300 border-dashed shadow-sm rounded-2xl">
+            <h2 className="text-lg font-medium text-orange-700">
+              User Management
+            </h2>
+            <p className="mt-1 text-sm text-gray-600">Coming soon...</p>
+          </div>
+        </div>
       </div>
-      </div>
-    
+    </div>
   );
 };
 
 export default Dashboard;
-

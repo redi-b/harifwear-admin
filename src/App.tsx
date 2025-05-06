@@ -11,10 +11,9 @@ import Dashboard from "@/pages/admin/Dashboard";
 import RootLayout from "@/layouts/RootLayout";
 import NotFound from "@/pages/NotFound";
 
-import Custom_order from "./pages/custom_order/Custom_order";
-
-import OrdersStatus from "./pages/order_status/OrderStatus";
-import Regular_Orders from "./pages/regular_order/Regular_Orders";
+import Orders from "@/pages/admin/Orders";
+import RegularOrderDetail from "./pages/admin/RegularOrderDetail";
+import CustomOrderDetail from "./pages/admin/CustomOrderDetail";
 
 function App() {
   const router = createBrowserRouter(
@@ -26,19 +25,10 @@ function App() {
 
         <Route path="/" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<RegularOrderDetail />} />
+          <Route path="/orders/custom/:id" element={<CustomOrderDetail />} />
         </Route>
-        <Route path="/normal_orders" element={<AdminLayout />}>
-          <Route index element={<Regular_Orders />} />
-        </Route>
-        <Route path="/custom_orders" element={<AdminLayout />}>
-          <Route index element={<Custom_order />} />
-        </Route>
-        
-        <Route path="/order_status" element={<AdminLayout />}>
-          <Route index element={<OrdersStatus />} />
-        </Route>
-      
-        
 
         <Route path="*" element={<NotFound />} />
       </Route>

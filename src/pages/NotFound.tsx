@@ -5,7 +5,7 @@ const NotFound = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center px-4 overflow-x-hidden overflow-y-auto min-h-screen sm:px-6 md:px-12">
+      <div className="flex items-center justify-center min-h-screen px-4 overflow-x-hidden overflow-y-auto sm:px-6 md:px-12">
         <div className="w-full max-w-md p-6 text-center rounded-lg md:max-w-2xl">
           <h1 className="mb-4 text-6xl font-bold text-orange-600 sm:text-8xl">
             404
@@ -19,7 +19,7 @@ const NotFound = () => {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all duration-300 bg-orange-500 rounded-md shadow hover:bg-orange-600 hover:scale-105"
+            className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all duration-300 bg-orange-500 rounded-md shadow cursor-pointer hover:bg-orange-600 hover:scale-105"
           >
             Back to Home
           </button>
