@@ -139,7 +139,7 @@ const CustomOrderDetail: React.FC = () => {
             Update Order Status
           </h2>
           <div className="flex items-center gap-4">
-            <div className="relative inline-block max-w-sm min-w-xs">
+            <div className="relative inline-block w-3/5 max-w-sm">
               <select
                 value={selectedStatus}
                 onChange={(e) =>
