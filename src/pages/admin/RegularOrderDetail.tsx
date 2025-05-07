@@ -21,6 +21,8 @@ interface ProductDetail {
   id: string;
   name: string;
   price: string;
+  color: string;
+  size: string;
   images?: string[];
   quantity: number;
 }
@@ -73,6 +75,8 @@ const RegularOrderDetail: React.FC = () => {
               name: res.data.name,
               price: res.data.price,
               images: res.data.images,
+              color: res.data.color,
+              size: res.data.color,
               quantity: p.quantity,
             }))
           )
@@ -257,7 +261,7 @@ const RegularOrderDetail: React.FC = () => {
                 <p>
                   <span className="font-medium text-gray-600">Subtotal:</span>{" "}
                   <span className="text-gray-800">
-                    ETB {order.subtotal.toFixed(2)}
+                    {order.subtotal.toFixed(2)} Birr
                   </span>
                 </p>
                 <p>
@@ -265,7 +269,7 @@ const RegularOrderDetail: React.FC = () => {
                     Delivery Fee:
                   </span>{" "}
                   <span className="text-gray-800">
-                    ETB {order.delivery_fee.toFixed(2)}
+                    {order.delivery_fee.toFixed(2)} Birr
                   </span>
                 </p>
               </div>
@@ -349,52 +353,60 @@ const RegularOrderDetail: React.FC = () => {
             <ul className="space-y-6">
               {products.map((product) => {
                 const name =
-                  product.name.length > 50
-                    ? product.name.slice(0, 50) + "…"
+                  product.name.length > 80
+                    ? product.name.slice(0, 80) + "…"
                     : product.name;
                 const price = parseFloat(product.price);
                 return (
-                  <li
-                    key={product.id}
-                    className="flex gap-6 pb-4 border-b border-gray-200"
+                  <a
+                    target="_blank"
+                    href={`https://harifwear.shop/product/${product.id}`}
                   >
-                    <div className="flex-shrink-0">
-                      {product.images && product.images[0] ? (
-                        <img
-                          src={product.images[0]}
-                          alt={product.name}
-                          className="object-cover w-16 h-16 rounded-md"
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='orange'%3E%3Cpath d='M0 0h64v64H0z'/%3E%3C/svg%3E";
-                          }}
-                        />
-                      ) : (
-                        <div className="flex items-center justify-center w-16 h-16 bg-gray-200 rounded-md">
-                          <FaXmark size={32} className="text-orange-600" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex justify-between flex-1">
-                      <div className="space-y-2">
-                        <p
-                          className="text-base font-semibold text-gray-800 group"
-                          title={product.name}
-                        >
-                          {name}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Quantity: {product.quantity}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Unit Price: ETB {price.toFixed(2)}
-                        </p>
+                    <li
+                      key={product.id}
+                      className="flex items-center gap-6 p-2 transition-all border-b border-gray-200 rounded-lg hover:bg-gray-100"
+                    >
+                      <div className="flex-shrink-0">
+                        {product.images && product.images[0] ? (
+                          <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className="object-cover w-16 h-16 rounded-md"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='gray'%3E%3Cpath d='M0 0h64v64H0z'/%3E%3C/svg%3E";
+                            }}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-16 h-16 bg-gray-200 rounded-md">
+                            <FaXmark size={32} className="text-orange-600" />
+                          </div>
+                        )}
                       </div>
-                      <p className="text-base font-semibold text-gray-800">
-                        ETB {(price * product.quantity).toFixed(2)}
-                      </p>
-                    </div>
-                  </li>
+                      <div className="flex justify-between flex-1">
+                        <div className="space-y-2">
+                          <p
+                            className="text-base font-semibold text-gray-800 group"
+                            title={product.name}
+                          >
+                            {name}
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600">
+                            Quantity: {product.quantity}
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600">
+                            Price: {price.toFixed(2)} Birr
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600">
+                            Color: {product.color}
+                          </p>
+                          <p className="text-sm font-semibold text-gray-600">
+                            Size: {product.size}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  </a>
                 );
               })}
             </ul>

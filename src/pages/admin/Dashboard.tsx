@@ -27,11 +27,13 @@ const Dashboard: React.FC = () => {
             </p>
           </Link>
 
-          <div className="w-full max-w-xl p-6 transition border border-gray-300 border-dashed shadow-sm rounded-2xl">
-            <h2 className="text-lg font-medium text-orange-700">
+          <div className="w-full max-w-xl p-6 border border-gray-300 border-dashed shadow-inner opacity-50 cursor-not-allowed select-none rounded-2xl bg-gray-50">
+            <h2 className="text-lg font-medium text-gray-500">
               User Management
             </h2>
-            <p className="mt-1 text-sm text-gray-600">Coming soon...</p>
+            <p className="mt-1 text-sm text-gray-400">
+              Manage roles and permissions.
+            </p>
           </div>
         </div>
       </div>
