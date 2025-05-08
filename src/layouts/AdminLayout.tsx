@@ -4,11 +4,11 @@ import { useAuth } from "@/hooks/useAuth";
 import Loading from "@/components/Loading";
 
 const AdminLayout = () => {
-  const { user, authenticated, signOut } = useAuth();
+  const { user, authenticated, loading, verifying, signOut } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authenticated) {
+    if (!authenticated && !verifying) {
       navigate("/sign-in");
     }
   }, [authenticated, navigate]);
@@ -22,7 +22,7 @@ const AdminLayout = () => {
     }
   };
 
-  if (!authenticated) return <Loading />;
+  if (!authenticated || loading) return <Loading />;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -30,13 +30,13 @@ const AdminLayout = () => {
         <Link to={"/"} className="text-lg font-semibold text-orange-600">
           Harifwear Admin
         </Link>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
+        <div className="flex flex-col items-center gap-4 text-sm text-gray-600 sm:flex-row">
           <span>{user?.email}</span>
           <button
             onClick={handleLogout}
-            className="px-3 py-1 text-white bg-orange-600 rounded cursor-pointer hover:bg-orange-500"
+            className="px-3 py-1 font-semibold text-white bg-orange-600 rounded cursor-pointer md:font-medium hover:bg-orange-500"
           >
-            Logout
+            Log out
           </button>
         </div>
       </header>

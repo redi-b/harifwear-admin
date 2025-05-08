@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import Loading from "@/components/Loading";
 
 const AuthLayout = () => {
-  const { authenticated, loading } = useAuth();
+  const { authenticated, loading, verifying } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const AuthLayout = () => {
     }
   }, [authenticated, loading, navigate]);
 
-  if (loading || authenticated) return <Loading />;
+  if (loading || authenticated || verifying) return <Loading />;
 
   return <Outlet />;
 };
