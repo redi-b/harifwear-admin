@@ -11,7 +11,7 @@ const AdminLayout = () => {
     if (!authenticated && !verifying) {
       navigate("/sign-in");
     }
-  }, [authenticated, navigate]);
+  }, [authenticated, navigate, verifying]);
 
   const handleLogout = async () => {
     const { error } = await signOut();

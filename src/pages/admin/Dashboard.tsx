@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="p-8 text-black">
+    <div className="px-2 py-8 text-black">
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-semibold text-gray-800">

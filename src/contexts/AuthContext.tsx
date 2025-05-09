@@ -71,7 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   const [user, setUser] = useState<User | null>(cachedUser);
   const [loading, setLoading] = useState(!cachedUser && shouldFetchUser);
-  const [verifying, setVerifying] = useState(true);
+  const [verifying, setVerifying] = useState(!cachedUser);
   const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -89,6 +89,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   useEffect(() => {
+    if (!shouldFetchUser) {
+      setVerifying(false);
+      setLoading(false);
+      return;
+    }
+
     if (!userPending) {
       if (userData) {
         setUser(decodeUser(userData));
@@ -102,7 +108,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setVerifying(false);
       setLoading(false);
     }
-  }, [userPending, userData, isUserError, userError]);
+  }, [shouldFetchUser, userPending, userData, isUserError, userError]);
 
   const signIn = async (email: string, password: string, from?: string) => {
     const { user, error } = await signInUser(email, password);

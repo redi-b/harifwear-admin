@@ -201,7 +201,7 @@ const Orders = () => {
   return (
     <div className="flex flex-col items-center min-h-screen py-6 md:px-2">
       <div className="w-full max-w-6xl">
-        <h1 className="mb-6 text-4xl font-bold text-center text-gray-900">
+        <h1 className="mb-6 text-3xl font-bold text-center text-gray-900 sm:text-4xl">
           Admin Order Management
         </h1>
         {/* Sticky Controls */}
