@@ -75,8 +75,8 @@ const RegularOrderDetail: React.FC = () => {
               name: res.data.name,
               price: res.data.price,
               images: res.data.images,
-              color: res.data.color,
-              size: res.data.color,
+              color: p.color || "N/A",
+              size: p.size || "N/A",
               quantity: p.quantity,
             }))
           )
